@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ASIC Project</title>
+    <link rel="stylesheet" href="https://code.s4d.io/widget-space/production/main.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.s4d.io/widget-space/production/bundle.js"></script>
+
+</head>
+
+<body>
+<div class="row">
+    <div class="col-md-12" style="text-align: center;">
+    <h1>Medi-Plus</h1>
+    <h3>[ASIC Project]</h3>
+    </div>
+    <div class="col-md-12 pull-right">
+<div id="my-ciscospark-widget" style="width:300px; height:450px;"/></div>
+</div>
+
+    <script>
+  var widgetEl = document.getElementById('my-ciscospark-widget');
+  // Init a new widget
+  webex.widget(widgetEl).spaceWidget({
+    guestToken: '{{data[0]}}',
+    destinationId: '{{data[1]}}',
+    destinationType: 'email',
+    spaceActivities: {"files":false,"meet":true,"message":true,"people":true},
+    initialActivity: 'message',
+    secondaryActivitiesFullWidth: false,
+    composerActions: {"files":true,"meet":true,"message":true,"people":true,"attachFiles":true}
+  });
+
+
+</script>
+</body>
+
+</html>
