@@ -59,7 +59,7 @@ If the illness is critical based on the prelimnary analysis of the symptoms, bot
 The following demo illustrates the above described two major use cases of a patient leveraging our solution (<b> additional use cases are work in progress </b>) to use the healthcare services of a ficticious hospital called "Medi-Plus+".
 
 
-[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/-q5kTo_u4I4)
+[![Watch the video](documents/youtube-image.png)](https://youtu.be/-q5kTo_u4I4)
 
 ## Prerequisites
 * Python 3.x
