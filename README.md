@@ -56,7 +56,7 @@ If the illness is critical based on the prelimnary analysis of the symptoms, bot
  
 ## Demo
 
-The following demo illustrates the above described two major use cases of a patient leveraging our solution (<b> additional use cases are work in progress </b>) to use the healthcare services of a ficticious hospital called "Medi-Plus+".
+The following demo illustrates the above described two major use cases of a patient leveraging our solution (<b> additional use cases are work in progress like ML for symptom analysis and decision making to assign docotors/nurses,Digital prescription, secure vitals & test report exchange between patient & nurse/doctor only - all of these through native modules or leveraging APIs from mindmeld to illustrate the integration of webex teams and the power of the platform to provide such a ecosystem </b>) to use the healthcare services of a ficticious hospital called "Medi-Plus+".
 
 
 [![Watch the video](documents/youtube-image.png)](https://youtu.be/-q5kTo_u4I4)
