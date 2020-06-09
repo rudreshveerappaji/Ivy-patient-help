@@ -6,6 +6,7 @@ Healthcare in your palms!
 </p>
  
   
+  
 ## Use case / Introduction
 
 Healthcare just like any other industry is undergoing rapid digitization, and in the recent past this the need for this has increase many fold due to COVID resulting in complete and partial lockdowns making it difficult for patients to get the medical care at the right time on one hand, and on the other the medical systems are overwhelmed by the increased load. There is no better time than now to leverage tecnologies and solutions to solve the issues of Healthcare vertical, and address areas of faster diagnosis, faster access to front line medical staff and doctors. With this goal in mind, we have designed a solution that addresses some of these issues, by leveraging Cisco's collaboration and networking products by building on top of the open and programmable principles that these are built upon.
@@ -115,6 +116,7 @@ flask run
 ```
 
 
+
 ## Conclusion
 
 The solution proposed and validated here with the prototype, can be easily integrated in a Hospital or Medical environment by leveraging Cisco Webex teams, and achieve better user experience for patient & nurse/doctor interactions. 
@@ -129,10 +131,13 @@ Here are the top benefits of using this solution:
   7. AI/ML integration to enhance prelimary diagnosis, on top of the platform that this solution provides.
   8. Replicable solution model which can be adapted to any other industry for similar benefits
 
+
 ## Authors
 
 * Rudresh Veerappaji (rudv@cisco.com)
 * Harpreet Bhatia (harbhati@cisco.com)
+
+
 
 ## DISCLAIMER:
 Please note: This script is meant for demo purposes only. All tools/ scripts in this repo are released for use "AS IS" without any warranties of any kind, including, but not limited to their installation, use, or performance. Any use of these scripts and tools is at your own risk. There is no guarantee that they have been through thorough testing in a comparable environment and we are not responsible for any damage or data loss incurred with their use. You are responsible for reviewing and testing any scripts you run thoroughly before use in any non-testing environment.
