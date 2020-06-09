@@ -124,7 +124,7 @@ flask run
 
 ## Conclusion
 
-The solution proposed and validated here with the prototype, can be easily integrated in a Hospital or Medical environment by leveraging Cisco Webex teams, and achieve better user experience for patient & nurse/doctor interactions. 
+The solution proposed and validated here with the prototype (and the additional use cases that are work in progress listed in "Demo" section above), can be easily integrated in a Hospital or Medical environment by leveraging Cisco Webex teams, and achieve better user experience for patient & nurse/doctor interactions. 
 
 Here are the top benefits of using this solution:
   1. Reduced time for adoption : Quick adoption of the solution without the need for network redesign of physical infrastructure.
