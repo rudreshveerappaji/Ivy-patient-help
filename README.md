@@ -11,9 +11,11 @@ Healthcare in your palms!
 
 Healthcare just like any other industry is undergoing rapid digitization, and in the recent past this the need for this has increase many fold due to COVID resulting in complete and partial lockdowns making it difficult for patients to get the medical care at the right time on one hand, and on the other the medical systems are overwhelmed by the increased load. There is no better time than now to leverage tecnologies and solutions to solve the issues of Healthcare vertical, and address areas of faster diagnosis, faster access to front line medical staff and doctors. With this goal in mind, we have designed a solution that addresses some of these issues, by leveraging Cisco's collaboration and networking products by building on top of the open and programmable principles that these are built upon.
 
+
 ## Problem statement
 
 Healthcare experience for both patients and medical staff including doctors needs to drastically improve by adopting technologies, especially in this near reality of a spreading pandemic, resulting partial/complete lockdowns and overwhelmed medical infrastructures across the world. Now more than ever there is need for faster intial diagnosis, access to front line medical staff and to doctors by leveraging technologies that enable optimizations including virtual services.
+
 
 ## Solution
 
@@ -51,9 +53,11 @@ If the illness is critical based on the prelimnary analysis of the symptoms, bot
   <img src="documents/Work-flow-2.png">
 </p>
 
+
 ## Cisco Products
 * Cisco Webex Teams
 * Cisco Webex DX80 (Optional)
+ 
  
 ## Demo
 
@@ -62,6 +66,7 @@ The following demo illustrates the above described two major use cases of a pati
 
 [![Watch the video](documents/youtube-image.png)](https://youtu.be/-q5kTo_u4I4)
 
+
 ## Prerequisites
 * Python 3.x
 * Text editor
@@ -69,6 +74,7 @@ The following demo illustrates the above described two major use cases of a pati
 * Webex bot token
 * Webex guest issuer app id and secret
 * Python libraries in req.txt
+
 
 ## Installation
 
@@ -114,7 +120,6 @@ Start ngrok tunnel - ./ngrok http 8080
 FALSK_APP = main.py
 flask run
 ```
-
 
 
 ## Conclusion
