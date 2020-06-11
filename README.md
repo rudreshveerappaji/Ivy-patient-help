@@ -6,7 +6,6 @@ Healthcare in your palms!
 </p>
  
   
-  
 ## Use case / Introduction
 
 Healthcare just like any other industry is undergoing rapid digitization, and in the recent past this the need for this has increase many fold due to COVID resulting in complete and partial lockdowns making it difficult for patients to get the medical care at the right time on one hand, and on the other the medical systems are overwhelmed by the increased load. There is no better time than now to leverage tecnologies and solutions to solve the issues of Healthcare vertical, and address areas of faster diagnosis, faster access to front line medical staff and doctors. With this goal in mind, we have designed a solution that addresses some of these issues, by leveraging Cisco's collaboration and networking products by building on top of the open and programmable principles that these are built upon.
@@ -32,6 +31,7 @@ A patient accesses hospital portal online through a smartphone, securely shares 
 ##### Critical - Preliminary diagnosis & Immediate virtual assistance
 
 If the illness is critical based on the prelimnary analysis of the symptoms, bot module will find a resource based on doctor/Nurse's webex team space status (which can be either manually set by the person or automatic detection like whether on call or not on duty or etc) and if the status is available and on duty, the best available doctor that matches medical expertise to the symptoms of the patient will be picked, and a webex video call will be initiated. Further, vitals and test reports sharing, digital prescription sharing etc can be used by leveraging the webex teams services.
+
 
 <p align="center">
   <img src="documents/Use-case-2.png">
@@ -78,10 +78,12 @@ The following demo illustrates the above described two major use cases of a pati
 
 ## Installation
 
+
 1. Clone this repository <b>Change after pushing the repo to CiscoSE</b>
 ```
 git clone https://wwwin-github.cisco.com/abhr/patient-help.git
 ```
+
 
 2. Configure a .env file in the code directory under config folder with all the necessary environment variables
 ```
@@ -98,15 +100,18 @@ GUEST_ISSUER_SECRET = 'Guest Issuer APP Secret'
 python -m venv /path/to/new/virtual/environment
 ```
 
+
 4. Activate the newly created virtual environment
 ```
 source venv/bin/activate
 ```
 
+
 5. Install the required libraries into the virtual environment
 ```
 pip install -r req.txt
 ```
+
 
 6. Run the bot.py on a publicly acessible URL using ngrok(used in this project)
 ```
@@ -115,12 +120,12 @@ Ngrok Docs - https://ngrok.com/docs
 Start ngrok tunnel - ./ngrok http 8080
 ```
 
+
 7. Run main.py to serve the main page using flask
 ```
 FALSK_APP = main.py
 flask run
 ```
-
 
 ## Conclusion
 
@@ -141,7 +146,6 @@ Here are the top benefits of using this solution:
 
 * Rudresh Veerappaji (rudv@cisco.com)
 * Harpreet Bhatia (harbhati@cisco.com)
-
 
 
 ## DISCLAIMER:
