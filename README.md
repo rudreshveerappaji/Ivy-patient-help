@@ -140,6 +140,7 @@ Here are the top benefits of using this solution:
   6. Sensors like Apple Watch, etc that measure medical vitals like pulse rate, respiration rate, heart rate, BP, temperature etc can be remotely measured integrated to the solution.
   7. AI/ML integration to enhance prelimary diagnosis, on top of the platform that this solution provides.
   8. Replicable solution model which can be adapted to any other industry for similar benefits
+  9. Symptom Analysis and basic diagnosis using AI/ML
 
 
 ## Authors
