@@ -20,6 +20,8 @@ import os
 import re
 from time import sleep
 from dotenv import load_dotenv
+import smtplib, ssl
+from email.message import EmailMessage
 
 import requests
 from flask import Flask, render_template, request
@@ -31,6 +33,8 @@ bot_email = os.getenv('BOT_EMAIL')
 teams_token = os.getenv('BOT_TOKEN')
 bot_url = os.getenv('BOT_URL')
 bot_app_name = os.getenv('BOT_NAME')
+user_token = os.getenv('WEBEX_USER_TOKEN')
+email_password = os.getenv('GMAIL_PASSWORD')
 
 print(bot_email)
 
@@ -136,21 +140,45 @@ def greetings():
     return "Hi there, welcome to MediLabs!! My name is %s. please share your name, email address, location and patient ID.<br/>" % bot_app_name
 
 
-def book_appointment(room):
+
+def book_appointment(room, selected_option,patient_email):
     '''
     Book an appointment
     :param room: Webex roomId
     :return: None
     '''
-    msg = "Appointment successfully booked, kindly find the details of your appointment with calendar information and nearest hospital location<br/>" \
-          "Booking ID: PA3214<br/>"
-    send_post("https://api.ciscospark.com/v1/messages",
-              {"roomId": room, "markdown": msg})
+    print(selected_option)
+    if selected_option.__eq__("1"):
+        slot = "02/Aug/2020 1pm"
+        invite = schedule_meeting("2020-08-02T13:00:00-08:00","2020-08-02T14:00:00-08:00")
+    elif selected_option.__eq__("2"):
+        slot = "02/Aug/2020 3pm"
+        invite = schedule_meeting("2020-08-02T15:00:00-08:00", "2020-08-02T16:00:00-08:00")
+    elif selected_option.__eq__("3"):
+        slot = "04/Aug/2020 11am"
+        invite = schedule_meeting("2020-08-04T11:00:00-08:00", "2020-08-04T12:00:00-08:00")
+    meeting_link = invite['webLink']
+    meeting_password = invite['password']
+    msg = "Appointment successfully booked for <b>"+slot+"</b>, kindly find the details of your virtual appointment with calendar information and Cisco Webex meeting link.<br/>" \
+          "Booking ID: PA3214<br/>\n" \
+          "Meeting Link: "+str(meeting_link)+" \n" \
+          "\n Webex meeting information is sent to your email id "+str(patient_email)
     send_post("https://api.ciscospark.com/v1/messages",
               {"roomId": room, "files" : ["https://png.pngtree.com/png-vector/20190409/ourlarge/pngtree-ics-file-document-icon-png-image_922637.jpg"]})
+    # send_post("https://api.ciscospark.com/v1/messages",
+    #           {"roomId": room, 'markdown': '<a href=\'https://goo.gl/maps/m9ss8AHU1Pr1eCAn7\'>Click here to access hospital location</a><br/>Your appointment details with hospital location is sent to your email as well.', "files": [
+    #               "https://www.freepngimg.com/thumb/map/62873-map-computer-location-icon-icons-free-transparent-image-hd.png"]})
     send_post("https://api.ciscospark.com/v1/messages",
-              {"roomId": room, 'markdown': '<a href=\'https://goo.gl/maps/m9ss8AHU1Pr1eCAn7\'>Click here to access hospital location</a><br/>Your appointment details with hospital location is sent to your email as well.', "files": [
-                  "https://www.freepngimg.com/thumb/map/62873-map-computer-location-icon-icons-free-transparent-image-hd.png"]})
+              {"roomId": room, "markdown": msg})
+
+    email_msg = "Greetings,\n\nThank you for choosing Ivy. Please find your virtual appointment details via Cisco Webex below.\n\n" \
+    "Webex meeting link: "+meeting_link+ \
+    "Meeting Password: "+meeting_password+ \
+    "\n\nPlease join the meeting 5minutes ahead of schedule.\n\n" \
+    "Thank you,\nIvy - Patient Help\n" \
+    "For more information reach us at www.ivy.com"
+
+    send_email_notification(patient_email,email_msg)
     return
 
 
@@ -188,6 +216,41 @@ def notify_docs():
 
     print(response.text.encode('utf8'))
 
+
+def schedule_meeting(start, end):
+    url = "https://api.ciscospark.com/v1/meetings"
+
+    headers = {
+        'content-type': 'application/json; charset=utf-8',
+        'authorization': 'Bearer ' + user_token
+    }
+
+    payload = "{\"title\":\"Appointment with Dr. Abhi\",\"password\":\"abcd1234\",\"start\":\""+str(start)+"\",\"end\":\""+str(end)+"\",\"enabledAutoRecordMeeting\":\"false\",\"allowAnyUserToBeCoHost\":\"false\"}"
+    print(payload)
+    response = requests.request("POST", url, headers=headers, data=payload)
+
+    print(response.text)
+    return response.json()
+
+def send_email_notification(pat_email,message):
+    smtp_server = "smtp.gmail.com"
+    sender_email = "abhijithshastri@gmail.com"
+    receiver_email = pat_email
+    password = email_password
+
+    msg = EmailMessage()
+    msg.set_content(message)
+
+    msg['Subject'] = 'Appointment confirmation from Ivy - Patient Help'
+    msg['From'] = sender_email
+    msg['To'] = receiver_email
+
+    server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+    server.login(sender_email, password)
+    server.send_message(msg)
+    server.quit()
+    return
+
 setup_bot_webhook()
 
 app = Flask(__name__)
@@ -199,6 +262,7 @@ def teams_webhook():
     '''
 
     print(request)
+    global patient_email
     if request.method == 'POST':
         count = 0
         webhook = request.get_json(silent=True)
@@ -215,13 +279,21 @@ def teams_webhook():
             elif any(re.search(word,in_message) for word in [r'\bhi\b','hello','wassup']):
                 msg = greetings()
             elif any(word in in_message for word in ['i\'m','i am','my name is','im']):
+                patient_email = re.findall(r'[\w\.-]+@[\w\.-]+\.\w+', in_message)
+                patient_email = patient_email[0]
                 msg = "Thanks for sharing your details, what can we do for you?"
             elif any(word in in_message for word in ['appointment','book a time']):
+                msg = "Sure!! Please select your desired slot from below available options to meet Dr Abhi\n " \
+                      "<ul><li><h6>Option 1: 02/Aug/2020 1pm</h6></li>" \
+                      "<li><h6>Option 2: 02/Aug/2020 3pm</h6></li>" \
+                      "<li><h6>Option 3: 04/Aug/2020 11am</h6></li></ul>"
+            elif any(word in in_message for word in ['option', 'i will select', 'I will go with']):
+                option = re.findall(r'[1-3]', in_message)
                 msg = None
-                book_appointment(roomId)
+                book_appointment(roomId,option[0], patient_email)
             elif any(re.search(word,in_message) for word in ['call a doctor', 'connect me to the doctor', 'talk to a doctor', 'connect me to the doctor', 'speak to a doctor']):
                 msg = virtual_doc()
-            elif any(re.search(word,in_message) for word in ['thank you']):
+            elif any(re.search(word,in_message) for word in ['thank you', 'Bye', 'Cya', 'See you', 'thanks']):
                 msg = "<p>Your most welcome &#128512;</p>"
             elif any(re.search(word,in_message) for word in ['fever','cold', 'sore throat', 'fatigue','running nose', 'cough']):
                 num_symp = sum(word in in_message for word in ['fever','cold', 'sore throat', 'fatigue','running nose', 'cough'])

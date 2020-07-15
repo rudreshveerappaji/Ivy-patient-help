@@ -49,7 +49,7 @@ def generate_guest_token():
         "sub": str(random_user), #Guest User
         "name": "Patient David",
         "iss": os.getenv('GUEST_ISSUER_ID'), #Guest Issuer APP ID
-        "exp": "1592654400"  #06/20/2020 @ 12:00pm (UTC)  #Expiry date of Guest Token in UNIX timestamp
+        "exp": "1627776000"  #08/01/2021 @ 12:00am (UTC)  #Expiry date of Guest Token in UNIX timestamp
     }
     key = os.getenv('GUEST_ISSUER_SECRET')  #Guest Issuer Secret
     encoded = jwt.encode(payload, base64.b64decode(key), headers={
