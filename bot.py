@@ -244,7 +244,7 @@ def schedule_meeting(start, end):
 
 def send_email_notification(pat_email,message):
     smtp_server = "smtp.gmail.com"
-    sender_email = "abhijithshastri@gmail.com"
+    sender_email = "ivy.patient.help.asic@gmail.com"
     receiver_email = pat_email
     password = email_password
 
@@ -356,4 +356,4 @@ def check_vitals():
 if __name__ == "__main__":
     app.secret_key = os.urandom(24)
     # Run Bot
-    app.run(host="localhost", port=8080)
+    app.run(host="0.0.0.0", port=8080)
