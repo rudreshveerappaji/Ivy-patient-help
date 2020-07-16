@@ -293,10 +293,10 @@ def teams_webhook():
                 patient_email = patient_email[0]
                 msg = "Thanks for sharing your details, what can we do for you?"
             elif any(word in in_message for word in ['appointment','book a time']):
-                msg = "Sure!! Please select your desired slot from below available options to meet Dr Abhi\n " \
-                      "<ul><li><h6>Option 1: 02/Aug/2020 1pm</h6></li>" \
-                      "<li><h6>Option 2: 02/Aug/2020 3pm</h6></li>" \
-                      "<li><h6>Option 3: 04/Aug/2020 11am</h6></li></ul>"
+                msg = "Sure!! Please select your desired slot from below available options to meet Doctor/Nurses\n\n " \
+                      "<br><h4>Option 1: 02/Aug/2020 1pm</h4>\n\n" \
+                      "<br><h4>Option 2: 02/Aug/2020 3pm</h4>\n\n" \
+                      "<br><h4>Option 3: 04/Aug/2020 11am</h4>"
             elif any(word in in_message for word in ['option', 'i will select', 'I will go with']):
                 option = re.findall(r'[1-3]', in_message)
                 msg = None
