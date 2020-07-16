@@ -22,6 +22,7 @@ from time import sleep
 from dotenv import load_dotenv
 import smtplib, ssl
 from email.message import EmailMessage
+from flask import Markup, flash
 
 import requests
 from flask import Flask, render_template, request
@@ -162,7 +163,7 @@ def book_appointment(room, selected_option,patient_email):
     msg = "Appointment successfully booked for <b>"+slot+"</b>, kindly find the details of your virtual appointment with calendar information and Cisco Webex meeting link.<br/>" \
           "Booking ID: PA3214<br/>\n" \
           "Meeting Link: "+str(meeting_link)+" \n" \
-          "\n Webex meeting information is sent to your email id "+str(patient_email)
+          "\n Appointment details via Webex meetings is sent to your email id "+str(patient_email)
     send_post("https://api.ciscospark.com/v1/messages",
               {"roomId": room, "files" : ["https://png.pngtree.com/png-vector/20190409/ourlarge/pngtree-ics-file-document-icon-png-image_922637.jpg"]})
     # send_post("https://api.ciscospark.com/v1/messages",
@@ -173,9 +174,10 @@ def book_appointment(room, selected_option,patient_email):
 
     email_msg = "Greetings,\n\nThank you for choosing Ivy. Please find your virtual appointment details via Cisco Webex below.\n\n" \
     "Webex meeting link: "+meeting_link+ \
-    "Meeting Password: "+meeting_password+ \
-    "\n\nPlease join the meeting 5minutes ahead of schedule.\n\n" \
-    "Thank you,\nIvy - Patient Help\n" \
+    "\nMeeting Password: "+meeting_password+ \
+    "\n\nRecord vitals using your smart wearable device before the appointment: "+bot_url+"/checkvitals" \
+    "\n\nPlease join the meeting 5minutes ahead of schedule." \
+    "\n\nThank you,\nIvy - Patient Help\n" \
     "For more information reach us at www.ivy.com"
 
     send_email_notification(patient_email,email_msg)
@@ -196,7 +198,15 @@ def connect_doc(room):
     Webex teams video call with a doctor
     :return: message
     '''
-    msg = "Based on your symptoms and criticality of the illness, I'm connecting you to a nurse/doctor right away...<br/><br/>Searching for available nurse/doctor.....<br/><br/>"
+    msg = "Before we connect you to our Doctor/Nurse, Please authorize Ivy on your registered smart wearable device to fetch vitals."
+    send_post("https://api.ciscospark.com/v1/messages",
+              {"roomId": room, "markdown": msg})
+    sleep(10)
+    msg = "Good News!! Your vitals were fetched and shared with the Doctor/Nurse successfully"
+    send_post("https://api.ciscospark.com/v1/messages",
+              {"roomId": room, "markdown": msg})
+    sleep(5)
+    msg = "Based on your symptoms/vitals analysis and criticality of the illness, I'm connecting you to a nurse/doctor right away...<br/><br/>Searching for available nurse/doctor.....<br/><br/>"
     send_post("https://api.ciscospark.com/v1/messages",
               {"roomId": room, "markdown": msg})
     sleep(5)
@@ -333,6 +343,17 @@ def addoc():
     print("bot guest - " +guest_token)
     return render_template("bot.html", data = [guest_token,"abhr@cisco.com"])
 
+@app.route('/checkvitals')
+def check_vitals():
+    '''
+    Function for video call
+    :return:
+    '''
+    message = Markup("<h1>Vitals check Initiated, authorize access to Ivy on your smart wearable device.</h1>")
+    flash(message)
+    return render_template('vitals.html')
+
 if __name__ == "__main__":
+    app.secret_key = os.urandom(24)
     # Run Bot
-    app.run(host="0.0.0.0", port=8080)
+    app.run(host="localhost", port=8080)

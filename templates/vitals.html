@@ -1,0 +1,28 @@
+<style>
+.alert {
+  padding: 12px;
+  border-radius: 3px;
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+  border-width: 2px;
+  border-style: solid;
+}
+
+.alert-error {
+  border-color: darkred;
+  background-color: red;
+  color: white;
+}
+
+.alert-info {
+  border-color: orange;
+  background-color: yellow;
+  color: black;
+}
+
+</style>
+<div class="flashes">
+  {% for message in get_flashed_messages() %}
+    <div class="alert-info">{{ message }}</div>
+  {% endfor %}
+</div>
