@@ -147,7 +147,7 @@ python = main.py
 
 ## Conclusion
 
-The solution proposed and validated here with the prototype (and the additional use cases that are work in progress listed in "Demo" section above), can be easily integrated in a Hospital or Medical environment by leveraging Cisco Webex teams, and achieve better user experience for patient & nurse/doctor interactions. 
+The solution proposed and validated here with this prototype, can be easily integrated in a Hospital or Medical environment by leveraging Cisco, open source &  3rd party healthcare products to achieve better user experience for patient & nurse/doctor interactions. 
 
 Here are the top benefits of using this solution:
   1. Reduced time for adoption : Quick adoption of the solution without the need for network redesign of physical infrastructure.
@@ -155,12 +155,16 @@ Here are the top benefits of using this solution:
   3. Faster response times for both prelimary diagnosis and subsequent diagnosis.
   4. Option Video integrations like with DX for better video experience.
   5. QR code based Digital prescription using whiteboard or other such tools integration and secure exchange between doctor, patient and pharmacy
-  6. Sensors like Apple Watch, etc that measure medical vitals like pulse rate, respiration rate, heart rate, BP, temperature etc can be remotely measured integrated to the solution.
+  6. Sensors like Samsung wearables, etc that measure medical vitals like pulse rate, respiration rate, heart rate, BP, temperature etc can be remotely measured integrated to the solution.
   7. AI/ML integration to enhance prelimary diagnosis, on top of the platform that this solution provides.
-  8. Replicable solution model which can be adapted to any other industry for similar benefits
+  8. Replicable solution model which can be adapted to any other industry for similar benefits.
 
 Future enhancements would include:
-  1. 
+  1. Natural Language processing through integration with mindmeld.
+  2. Sentiment analysis for automatic two way feedback.
+  3. Webex Assistant integration for note taking and transcript generation for records.
+  4. Blockchain integration for patient & doctor data.
+  5. Integration with smart wearables & fitness apps for richer & real-time data access.
 
 ## Authors
 
