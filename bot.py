@@ -23,6 +23,7 @@ from dotenv import load_dotenv
 import smtplib, ssl
 from email.message import EmailMessage
 from flask import Markup, flash
+import symptom_analytics_ml.symptom_analytics as ml
 
 
 import requests
