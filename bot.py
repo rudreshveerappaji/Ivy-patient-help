@@ -24,6 +24,7 @@ import smtplib, ssl
 from email.message import EmailMessage
 from flask import Markup, flash
 
+
 import requests
 from flask import Flask, render_template, request
 
@@ -181,7 +182,7 @@ def book_appointment(room, selected_option,patient_email):
     "For more information reach us at www.ivy.com"
 
     send_email_notification(patient_email,email_msg)
-    return
+    return meeting_link
 
 
 def virtual_doc():
@@ -213,15 +214,13 @@ def connect_doc(room):
     return msg
 
 
-def notify_docs():
+def notify_docs(payload):
     '''
     Notify docs when a call is established
     :return: response
     '''
     url = "https://api.ciscospark.com/v1/messages"
 
-    payload = "{\n\"toPersonEmail\": \"abhr@cisco.com\",\n\"markdown\": \"[Learn more](https://adaptivecards.io) about Adaptive Cards.\",\n\"attachments\": [\n{\n\"contentType\": \"application/vnd.microsoft.card.adaptive\",\n\"content\": {\n\"type\": \"AdaptiveCard\",\n\"version\": \"1.0\",\n\"body\": [\n{\n\"type\": \"TextBlock\",\n\"text\": \"Patient David is waiting in your Webex Teams room, kindly connect. Thank you.\"\n}\n],\n\"actions\": [\n{\n\"type\": \"Action.OpenUrl\",\n\"title\": \"Connect\",\n\"url\":\"http://0.0.0.0:8080/test\"\n}\n]\n}\n}\n]\n}"
-    print(payload)
     response = requests.request("POST", url, headers=headers, data=payload)
 
     print(response.text.encode('utf8'))
@@ -273,6 +272,7 @@ def teams_webhook():
 
     print(request)
     global patient_email
+    global option, disease, score
     if request.method == 'POST':
         count = 0
         webhook = request.get_json(silent=True)
@@ -289,8 +289,10 @@ def teams_webhook():
             elif any(re.search(word,in_message) for word in [r'\bhi\b','hello','wassup']):
                 msg = greetings()
             elif any(word in in_message for word in ['i\'m','i am','my name is','im']):
+                print(in_message)
                 patient_email = re.findall(r'[\w\.-]+@[\w\.-]+\.\w+', in_message)
                 patient_email = patient_email[0]
+                print(patient_email)
                 msg = "Thanks for sharing your details, what can we do for you?"
             elif any(word in in_message for word in ['appointment','book a time']):
                 msg = "Sure!! Please select your desired slot from below available options to meet Doctor/Nurses\n\n " \
@@ -300,16 +302,30 @@ def teams_webhook():
             elif any(word in in_message for word in ['option', 'i will select', 'I will go with']):
                 option = re.findall(r'[1-3]', in_message)
                 msg = None
-                book_appointment(roomId,option[0], patient_email)
+                webex_meet = "http://test.com"#book_appointment(roomId,option[0], patient_email)
+                if option.__eq__("1"):
+                    slot = "02/Aug/2020 1pm"
+                elif option.__eq__("2"):
+                    slot = "02/Aug/2020 3pm"
+                elif option.__eq__("3"):
+                    slot = "04/Aug/2020 11am"
+                print(disease,score,slot)
+                print(webex_meet)
+                payload = "{\n\"toPersonEmail\": \"abhr@cisco.com\",\n\"markdown\": \"[Learn more](https://adaptivecards.io) about Adaptive Cards.\",\n\"attachments\": [\n{\n\"contentType\": \"application/vnd.microsoft.card.adaptive\",\n\"content\": {\n\"type\": \"AdaptiveCard\",\n\"version\": \"1.0\",\n\"body\": [\n{\n\"type\": \"TextBlock\",\n\"text\": \"An appoinment is booked with you for patient Mr. David for "+str(slot)+". Based on Machine Learning symptom analysis it seems that the patient is suffering from "+str(disease)+" with the accuracy of "+str(score)+". Thank you.\"\n}\n],\n\"actions\": [\n{\n\"type\": \"Action.OpenUrl\",\n\"title\": \"Webex Meeting Link\",\n\"url\":\""+str(webex_meet)+"\"\n}\n]\n}\n}\n]\n}"
+                notify_docs(payload)
             elif any(re.search(word,in_message) for word in ['call a doctor', 'connect me to the doctor', 'talk to a doctor', 'connect me to the doctor', 'speak to a doctor']):
                 msg = virtual_doc()
             elif any(re.search(word,in_message) for word in ['thank you', 'Bye', 'Cya', 'See you', 'thanks']):
                 msg = "<p>Your most welcome &#128512;</p>"
-            elif any(re.search(word,in_message) for word in ['fever','cold', 'sore throat', 'fatigue','running nose', 'cough']):
-                num_symp = sum(word in in_message for word in ['fever','cold', 'sore throat', 'fatigue','running nose', 'cough'])
-                print(num_symp)
-                if num_symp > 4:
-                    notify_docs()
+            elif any(re.search(word,in_message) for word in ml.l1):
+                num_symp = sum(word in in_message for word in  ml.l1)
+                symptoms = in_message.split(',')
+                disease, score = ml.NaiveBayes(symptoms)
+                print("Disease = "+disease)
+                print("Score = " + str(score))
+                if disease in ml.critical_disease:
+                    payload = "{\n\"toPersonEmail\": \"abhr@cisco.com\",\n\"markdown\": \"[Learn more](https://adaptivecards.io) about Adaptive Cards.\",\n\"attachments\": [\n{\n\"contentType\": \"application/vnd.microsoft.card.adaptive\",\n\"content\": {\n\"type\": \"AdaptiveCard\",\n\"version\": \"1.0\",\n\"body\": [\n{\n\"type\": \"TextBlock\",\n\"text\": \"Patient David is waiting in your Webex Teams room, kindly connect. Based on Machine Learning symptom analysis it seems that the patient is suffering from "+str(disease)+" with the accuracy of "+str(score)+". Thank you.\"\n}\n],\n\"actions\": [\n{\n\"type\": \"Action.OpenUrl\",\n\"title\": \"Connect\",\n\"url\":\"http://0.0.0.0:8080/test\"\n}\n]\n}\n}\n]\n}"
+                    notify_docs(payload)
                     connect_doc(roomId)
                     msg = "<b>Dr Abhi</b> available now...<br/><a href=\""+bot_url+"/test\" target=\"_blank\">Click here to talk to your doctor over video</a>"
                 else:
