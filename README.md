@@ -107,7 +107,7 @@ source venv/bin/activate
 ```
 
 
-5. Install the required libraries into the virtual environment
+5. Install the required libraries into the virtual environment, inside the venv folder
 ```
 pip install -r req.txt
 ```
