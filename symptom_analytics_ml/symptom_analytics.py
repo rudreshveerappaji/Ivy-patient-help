@@ -1,7 +1,6 @@
 from tkinter import *
 import numpy as np
 import pandas as pd
-# from gui_stuff import *
 
 l1=['back_pain','constipation','abdominal_pain','diarrhoea','mild_fever','yellow_urine',
 'yellowing_of_eyes','acute_liver_failure','fluid_overload','swelling_of_stomach',
