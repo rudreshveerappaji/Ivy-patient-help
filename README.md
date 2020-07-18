@@ -35,7 +35,7 @@ With the goal of a comprehensive healthcare solution for patients and nurses/doc
 A patient accesses hospital portal online through a smartphone, securely shares symptoms to a anchor module powered by Webex teams, and the bot module does prelimary analysis of the symptoms based on Naive Bayes Machine Learning (ML) model & directs the patient to a nurse or doctor based on the criticality of the illness. Bot module will check the expertize, schedule and availability of doctors and book an appointment for the earliest available slot and shares this information to both patient & nurse/doctors.
 
 <p align="center">
-  <img src="documents/Use-case-1.png">
+  <img src="documents/Use-case-final-1.png">
 </p>
 
 #### Workflow-2
@@ -45,7 +45,7 @@ If the illness is critical based on the prelimnary analysis of the symptoms, bot
 
 
 <p align="center">
-  <img src="documents/Use-case-2.png">
+  <img src="documents/Use-case-final-2.png">
 </p>
 
 
@@ -63,7 +63,7 @@ If the illness is critical based on the prelimnary analysis of the symptoms, bot
 ## Solution workflow
 
 <p align="center">
-  <img src="documents/Work-flow-2.png">
+  <img src="documents/Work-flow-final-2.png">
 </p>
 
 
