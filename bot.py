@@ -129,8 +129,10 @@ def help_me():
     :return: message
     '''
     msg = "Sure! I can help. Below are the few things that I can help you with<br/>" \
-           "Book a virtual or physical appointment with the nurse/doctor<br/>" \
-           "Emergency virtual assistance based on your answers to the questionaire"
+           "- Book a virtual appointment with the nurse/doctor & send email notifications with webex meeting details.<br/>" \
+           "- Emergency virtual assistance based on your symptoms and machine learning based analysis of your symptoms.<br>" \
+           "- Securely transfer your lab test/vital reports to your doctor.<br>" \
+           "- Secure QR code based digital prescription."
 
     return msg
 
@@ -191,7 +193,7 @@ def virtual_doc():
     Function to send symptom request message
     :return: message
     '''
-    msg = "Yes, for sure, but first can you please share the symptoms of the illness you are facing?<br/>"
+    msg = "Yes, for sure, but first can you please share the symptoms of the illness you are facing. <a href=\"https://github.com/rudreshveerappaji/Ivy-patient-help/blob/master/symptoms_list.txt\">Reference symptoms list.</a> <br/>"
     return msg
 
 
@@ -294,16 +296,25 @@ def teams_webhook():
                 'https://api.ciscospark.com/v1/messages/{0}'.format(webhook['data']['id']))
             in_message = result.get('text', '').lower()
             in_message = in_message.replace(bot_app_name.lower() + " ", '')
-            if any(re.search(word,in_message) for word in ['help','assist']):
+            if any(re.search(word,in_message) for word in ['help','assist', 'what can you do']):
                 msg = help_me()
             elif any(re.search(word,in_message) for word in [r'\bhi\b','hello','wassup']):
                 msg = greetings()
             elif any(word in in_message for word in ['i\'m','i am','my name is','im']):
                 print(in_message)
-                patient_email = re.findall(r'[\w\.-]+@[\w\.-]+\.\w+', in_message)
-                patient_email = patient_email[0]
+                try:
+                    patient_email = re.findall(r'[\w\.-]+@[\w\.-]+\.\w+', in_message)
+                    patient_email = patient_email[0]
+                except Exception as e:
+                    msg = "Please enter all the required details including email"
+                    send_post("https://api.ciscospark.com/v1/messages",
+                              {"roomId": webhook['data']['roomId'], "markdown": msg})
+                    return
                 print(patient_email)
-                msg = "Thanks for sharing your details, what can we do for you?"
+                msg = "Thanks for sharing your details, here are the list of things that I can help you with. Start by asking any of the following:<br>" \
+                      "- Book a virtual appointment.<br>" \
+                      "- Here are my symptoms: {Your list of symptoms}.- <a href=\"https://github.com/rudreshveerappaji/Ivy-patient-help/blob/master/symptoms_list.txt\">Reference symptoms list.</a><br>" \
+                      "- Connect to a doctor.<br>"
             elif any(word in in_message for word in ['appointment','book a time']):
                 msg = "Sure!! Please select your desired slot from below available options to meet Doctor/Nurses\n\n " \
                       "<br><h4>Option 1: 02/Aug/2020 1pm</h4>\n\n" \
@@ -324,7 +335,7 @@ def teams_webhook():
                 print(webex_meet)
                 payload = "{\n\"toPersonEmail\": \"abhr@cisco.com\",\n\"markdown\": \"[Learn more](https://adaptivecards.io) about Adaptive Cards.\",\n\"attachments\": [\n{\n\"contentType\": \"application/vnd.microsoft.card.adaptive\",\n\"content\": {\n\"type\": \"AdaptiveCard\",\n\"version\": \"1.0\",\n\"body\": [\n{\n\"type\": \"TextBlock\",\n\"text\": \"An appoinment is booked with you for patient Mr. David for "+str(slot)+". Based on Machine Learning symptom analysis it seems that the patient is suffering from "+str(disease)+" with the accuracy of "+str(score)+". Thank you.\"\n}\n],\n\"actions\": [\n{\n\"type\": \"Action.OpenUrl\",\n\"title\": \"Webex Meeting Link\",\n\"url\":\""+str(webex_meet)+"\"\n}\n]\n}\n}\n]\n}"
                 notify_docs(payload)
-            elif any(re.search(word,in_message) for word in ['call a doctor', 'connect me to the doctor', 'talk to a doctor', 'connect me to the doctor', 'speak to a doctor']):
+            elif any(re.search(word,in_message) for word in ['call a doctor', 'connect me to the doctor', 'talk to a doctor', 'connect me to a doctor', 'speak to a doctor']):
                 msg = virtual_doc()
             elif any(re.search(word,in_message) for word in ['thank you', 'Bye', 'Cya', 'See you', 'thanks']):
                 msg = "<p>Your most welcome &#128512;</p>"
@@ -383,4 +394,4 @@ def check_vitals():
 if __name__ == "__main__":
     app.secret_key = os.urandom(24)
     # Run Bot
-    app.run(host="localhost", port=8080)
+    app.run(host="0.0.0.0", port=8080)
