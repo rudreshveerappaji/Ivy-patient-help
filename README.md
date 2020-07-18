@@ -99,7 +99,7 @@ git clone https://wwwin-github.cisco.com/rudreshveerappaji/Ivy-patient-help.git
 ```
 
 
-2. Configure a .env file in the code directory under config folder with all the necessary environment variables
+2. Configure a .env file in the code directory under config folder with all the necessary environment variables (replace the your values)
 ```
 BOT_EMAIL = 'Bot Email'
 BOT_TOKEN = 'Bot Token'
@@ -132,7 +132,7 @@ pip install -r req.txt
 6. Run the bot.py on a publicly acessible URL using ngrok(used in this project)
 ```
 Ngrok Docs - https://ngrok.com/docs
-Start ngrok tunnel - ./ngrok http 8080
+Start ngrok tunnel - run on a terminal -> ./ngrok http 8080
 FLASK_APP = bot.py
 flask run
 ```
