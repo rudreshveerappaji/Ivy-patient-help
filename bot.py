@@ -80,15 +80,18 @@ def check_webhook_id():
     Check if a webhook is already created for the Ngrok URL specified
     :return:
     '''
-    f = open("webhook_id.txt", "r")
+    f = open("webhook_id.txt", 'r')
     id = f.read()  # Fetch guest token
-    print("id - " + id)
+    print("id - " + str(id))
     url = "https://api.ciscospark.com/v1/webhooks/"+id
 
     response = requests.request("GET", url, headers=headers)
     res = response.json()
-    if(res['targetUrl'] == os.getenv('BOT_URL')):
-        return True
+    if(response.status_code == 200):
+        if(res['targetUrl'] == os.getenv('BOT_URL')):
+            return True
+        else:
+            return False
     else:
         return False
 
@@ -393,4 +396,4 @@ def check_vitals():
 if __name__ == "__main__":
     app.secret_key = os.urandom(24)
     # Run Bot
-    app.run(host="0.0.0.0", port=8080)
+    app.run(host="localhost", port=8080)
