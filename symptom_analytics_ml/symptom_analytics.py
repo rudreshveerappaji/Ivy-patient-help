@@ -77,85 +77,6 @@ tr.replace({'prognosis':{'Fungal infection':0,'Allergy':1,'GERD':2,'Chronic chol
 X_test= tr[l1]
 y_test = tr[["prognosis"]]
 np.ravel(y_test)
-# ------------------------------------------------------------------------------------------------------
-
-# def DecisionTree():
-#
-#     from sklearn import tree
-#
-#     clf3 = tree.DecisionTreeClassifier()   # empty model of the decision tree
-#     clf3 = clf3.fit(X,y)
-#
-#     # calculating accuracy-------------------------------------------------------------------
-#     from sklearn.metrics import accuracy_score
-#     y_pred=clf3.predict(X_test)
-#     print(accuracy_score(y_test, y_pred))
-#     print(accuracy_score(y_test, y_pred,normalize=False))
-#     # -----------------------------------------------------
-#
-#     psymptoms = [Symptom1.get(),Symptom2.get(),Symptom3.get(),Symptom4.get(),Symptom5.get()]
-#
-#     for k in range(0,len(l1)):
-#         # print (k,)
-#         for z in psymptoms:
-#             if(z==l1[k]):
-#                 l2[k]=1
-#
-#     inputtest = [l2]
-#     predict = clf3.predict(inputtest)
-#     predicted=predict[0]
-#
-#     h='no'
-#     for a in range(0,len(disease)):
-#         if(predicted == a):
-#             h='yes'
-#             break
-#
-#
-#     if (h=='yes'):
-#         t1.delete("1.0", END)
-#         t1.insert(END, disease[a])
-#     else:
-#         t1.delete("1.0", END)
-#         t1.insert(END, "Not Found")
-
-
-# def randomforest():
-#     from sklearn.ensemble import RandomForestClassifier
-#     clf4 = RandomForestClassifier()
-#     clf4 = clf4.fit(X,np.ravel(y))
-#
-#     # calculating accuracy-------------------------------------------------------------------
-#     from sklearn.metrics import accuracy_score
-#     y_pred=clf4.predict(X_test)
-#     print(accuracy_score(y_test, y_pred))
-#     print(accuracy_score(y_test, y_pred,normalize=False))
-#     # -----------------------------------------------------
-#
-#     psymptoms = [Symptom1.get(),Symptom2.get(),Symptom3.get(),Symptom4.get(),Symptom5.get()]
-#
-#     for k in range(0,len(l1)):
-#         for z in psymptoms:
-#             if(z==l1[k]):
-#                 l2[k]=1
-#
-#     inputtest = [l2]
-#     predict = clf4.predict(inputtest)
-#     predicted=predict[0]
-#
-#     h='no'
-#     for a in range(0,len(disease)):
-#         if(predicted == a):
-#             h='yes'
-#             break
-#
-#     if (h=='yes'):
-#         t2.delete("1.0", END)
-#         t2.insert(END, disease[a])
-#     else:
-#         t2.delete("1.0", END)
-#         t2.insert(END, "Not Found")
-
 
 def NaiveBayes(symtopmsList):
     from sklearn.naive_bayes import GaussianNB
@@ -191,6 +112,3 @@ def NaiveBayes(symtopmsList):
         return disease[a], accuracy_score(y_test, y_pred)
     else:
         return "Not Found"
-
-if __name__ == "__main__":
-    NaiveBayes(['cold','runny_nose'])
