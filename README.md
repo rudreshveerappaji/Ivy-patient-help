@@ -63,7 +63,7 @@ If the illness is critical based on the prelimnary analysis of the symptoms, bot
 ## Solution workflow
 
 <p align="center">
-  <img src="documents/Work-flow-final-2.2.png">
+  <img src="documents/Work-flow-2.2.png">
 </p>
 
 
