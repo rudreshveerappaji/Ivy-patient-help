@@ -228,6 +228,10 @@ def notify_docs(payload):
 
 
 def schedule_meeting(start, end):
+    '''
+        Schedule webex meeting as per selection
+        :return: response
+    '''
     url = "https://api.ciscospark.com/v1/meetings"
 
     headers = {
@@ -243,6 +247,11 @@ def schedule_meeting(start, end):
     return response.json()
 
 def send_email_notification(pat_email,message):
+    '''
+        Send email notification to the patient
+        :return: none
+    '''
+
     smtp_server = "smtp.gmail.com"
     sender_email = "ivy.patient.help.asic@gmail.com"
     receiver_email = pat_email
@@ -303,7 +312,8 @@ def teams_webhook():
             elif any(word in in_message for word in ['option', 'i will select', 'I will go with']):
                 option = re.findall(r'[1-3]', in_message)
                 msg = None
-                webex_meet = "http://test.com"#book_appointment(roomId,option[0], patient_email)
+                # Book Appointment and schedule webex meeting
+                webex_meet = book_appointment(roomId,option[0], patient_email)
                 if option.__eq__("1"):
                     slot = "02/Aug/2020 1pm"
                 elif option.__eq__("2"):
@@ -373,4 +383,4 @@ def check_vitals():
 if __name__ == "__main__":
     app.secret_key = os.urandom(24)
     # Run Bot
-    app.run(host="0.0.0.0", port=8080)
+    app.run(host="localhost", port=8080)
