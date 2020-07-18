@@ -4,39 +4,281 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ASIC Project</title>
+    <title>Medilab Free Bootstrap HTML5 Template</title>
+    <meta name="description" content="Free Bootstrap Theme by BootstrapMade.com">
+    <meta name="keywords"
+          content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Candal">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',    filename='css/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',    filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',    filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',    filename='css/chatbot.css') }}">
+    <!-- Chat Window -->
+    <link rel="stylesheet" href="../dist/css/chat-window.css">
     <link rel="stylesheet" href="https://code.s4d.io/widget-space/production/main.css">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://code.s4d.io/widget-space/production/bundle.js"></script>
-
 </head>
 
-<body>
-<div class="row">
-    <div class="col-md-12" style="text-align: center;">
-    <h1>Medi-Plus</h1>
-    <h3>[ASIC Project]</h3>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+<!--banner-->
+<section id="banner" class="banner">
+    <div class="bg-color">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="col-md-12">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#"><img src="{{ url_for('static',    filename='img/logo.png') }}"
+                                                              class="img-responsive"
+                                                              style="width: 140px; margin-top: -16px;"></a>
+                    </div>
+                    <div class="collapse navbar-collapse navbar-right" id="myNavbar">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#banner">Home</a></li>
+                            <li class=""><a href="#service">Services</a></li>
+                            <li class=""><a href="#about">About</a></li>
+                            <li class=""><a href="#testimonial">Testimonial</a></li>
+                            <li class=""><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row">
+                <div class="banner-info">
+                    <div class="banner-logo text-center">
+                        <img src="{{ url_for('static',    filename='img/logo.png') }}" class="img-responsive">
+                    </div>
+                    <div class="banner-text text-center">
+                        <h1 class="white">Healthcare in your Palms!!</h1>
+                        <h2 class ="white">[ASIC Project]</h2> <br>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod <br>tempor
+                            incididunt ut labore et dolore magna aliqua.</p>
+                        <a href="#contact" class="btn btn-appoint">Get the best healthcare.!</a>
+                    </div>
+                    <div class="overlay-detail text-center">
+                        <a href="#service"><i class="fa fa-angle-down"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-12 pull-right">
-<div id="my-ciscospark-widget" style="width:300px; height:450px;"/></div>
-</div>
+</section>
+<!--/ banner-->
+<!--service-->
+<section id="service" class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-3">
+                <h2 class="ser-title">Our Service</h2>
+                <hr class="botm-line">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                    cillum.</p>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <div class="service-info">
+                    <div class="icon">
+                        <i class="fa fa-stethoscope"></i>
+                    </div>
+                    <div class="icon-info">
+                        <h4>24 Hour Support</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+                <div class="service-info">
+                    <div class="icon">
+                        <i class="fa fa-ambulance"></i>
+                    </div>
+                    <div class="icon-info">
+                        <h4>Emergency Services</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <div class="service-info">
+                    <div class="icon">
+                        <i class="fa fa-user-md"></i>
+                    </div>
+                    <div class="icon-info">
+                        <h4>Medical Counseling</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+                <div class="service-info">
+                    <div class="icon">
+                        <i class="fa fa-medkit"></i>
+                    </div>
+                    <div class="icon-info">
+                        <h4>Premium Healthcare</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3 ">
+                <div id="body">
 
-    <script>
+                    <div id="chat-circle" class="btn btn-raised">
+                        <div id="chat-overlay"></div>
+                        <i class="fa fa fa-comments fa-2x" aria-hidden="true"></i>
+                    </div>
+
+                    <div class="chat-box">
+
+                        <div class="chat-box-header">
+                            <span class="chat-box-toggle"><i class="fa fa-close"></i></span>
+                        </div>
+                        <div class="chat-box-body">
+                            <div class="chat-box-overlay">
+                            </div>
+                            <div id="my-ciscospark-widget" style="width: 100%; height: 500px;"/>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<!--/ service-->
+<!--cta-->
+<section id="cta-1" class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="schedule-tab">
+                <div class="col-md-4 col-sm-4 bor-left">
+                    <div class="mt-boxy-color"></div>
+                    <div class="medi-info">
+                        <h3>Emergency Case</h3>
+                        <p>I am text block. Edit this text from Appearance / Customize / Homepage header columns. Lorem
+                            ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                        <a href="#" class="medi-info-btn">READ MORE</a>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <div class="medi-info">
+                        <h3>Emergency Case</h3>
+                        <p>I am text block. Edit this text from Appearance / Customize / Homepage header columns. Lorem
+                            ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                        <a href="#" class="medi-info-btn">READ MORE</a>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 mt-boxy-3">
+                    <div class="mt-boxy-color"></div>
+                    <div class="time-info">
+                        <h3>Opening Hours</h3>
+                        <table style="margin: 8px 0px 0px;" border="1">
+                            <tbody>
+                            <tr>
+                                <td>Monday - Friday</td>
+                                <td>8.00 - 17.00</td>
+                            </tr>
+                            <tr>
+                                <td>Saturday</td>
+                                <td>9.30 - 17.30</td>
+                            </tr>
+                            <tr>
+                                <td>Sunday</td>
+                                <td>9.30 - 15.00</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--cta-->
+
+<!-- Initialize Cisco Webex Teams plugin -->
+<script>
   var widgetEl = document.getElementById('my-ciscospark-widget');
   // Init a new widget
+  function functionName(parameter1) {
   webex.widget(widgetEl).spaceWidget({
     guestToken: '{{data[0]}}',
     destinationId: '{{data[1]}}',
     destinationType: 'email',
-    spaceActivities: {"files":false,"meet":true,"message":true,"people":true},
+    spaceActivities: {"files":true,"meet":true,"message":true,"people":true},
     initialActivity: 'message',
-    secondaryActivitiesFullWidth: false,
-    composerActions: {"files":true,"meet":true,"message":true,"people":true,"attachFiles":true}
+    secondaryActivitiesFullWidth: true,
+    composerActions: {"files":true,"meet":true,"message":true,"people":true}
   });
+}
 
 
 </script>
+<script>
+$(function() {
+  var INDEX = 0;
+  $("#chat-submit").click(function(e) {
+    e.preventDefault();
+    var msg = $("#chat-input").val();
+    if(msg.trim() == ''){
+      return false;
+    }
+    var buttons = [
+        {
+          name: 'Existing User',
+          value: 'existing'
+        },
+        {
+          name: 'New User',
+          value: 'new'
+        }
+      ];
+    setTimeout(function() {
+      generate_message(msg, 'user');
+    }, 1000)
+
+  })
+
+  $(document).delegate(".chat-btn", "click", function() {
+    var value = $(this).attr("chat-value");
+    var name = $(this).html();
+    $("#chat-input").attr("disabled", false);
+    generate_message(name, 'self');
+  })
+
+  $("#chat-circle").click(function() {
+    functionName('patienthelp@webex.bot')
+    $("#chat-circle").toggle('scale');
+    $(".chat-box").toggle('scale');
+  })
+
+  $(".chat-box-toggle").click(function() {
+    $("#chat-circle").toggle('scale');
+    $(".chat-box").toggle('scale');
+  })
+
+})
+
+</script>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.easing.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/custom.js"></script>
+<script src="contactform/contactform.js"></script>
+
 </body>
 
 </html>
