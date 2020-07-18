@@ -282,9 +282,7 @@ def teams_webhook():
     :return: Boolean or message
     '''
 
-    print(request)
-    global patient_email
-    global option, disease, score
+    global patient_email, option, disease, score,patient_name
     if request.method == 'POST':
         count = 0
         webhook = request.get_json(silent=True)
@@ -303,19 +301,21 @@ def teams_webhook():
             elif any(word in in_message for word in ['i\'m','i am','my name is','im']):
                 print(in_message)
                 try:
+                    patient_name = re.search('name\s\w+\s(\w+)',in_message).group(1)
                     patient_email = re.findall(r'[\w\.-]+@[\w\.-]+\.\w+', in_message)
                     patient_email = patient_email[0]
                 except Exception as e:
-                    msg = "Please enter all the required details including email"
+                    msg = "Please enter all the required details.<br>" \
+                          "Usage: My name is [name], email id [your email], patient id [your patient id]"
                     send_post("https://api.ciscospark.com/v1/messages",
                               {"roomId": webhook['data']['roomId'], "markdown": msg})
                     return
                 print(patient_email)
-                msg = "Thanks for sharing your details, here are the list of things that I can help you with. Start by asking any of the following:<br>" \
+                msg = "Welcome "+patient_name+" !! Thanks for sharing your details, here are the list of things that I can help you with. Start by asking any of the following:<br>" \
                       "- Book a virtual appointment.<br>" \
                       "- Here are my symptoms: {Your list of symptoms}.- <a href=\"https://github.com/rudreshveerappaji/Ivy-patient-help/blob/master/symptoms_list.txt\">Reference symptoms list.</a><br>" \
                       "- Connect to a doctor.<br>"
-            elif any(word in in_message for word in ['appointment','book a time']):
+            elif any(word in in_message for word in ['appointment','book a time', 'book an appointment']):
                 msg = "Sure!! Please select your desired slot from below available options to meet Doctor/Nurses\n\n " \
                       "<br><h4>Option 1: 02/Aug/2020 1pm</h4>\n\n" \
                       "<br><h4>Option 2: 02/Aug/2020 3pm</h4>\n\n" \
@@ -333,7 +333,7 @@ def teams_webhook():
                     slot = "04/Aug/2020 11am"
                 print(disease,score,slot)
                 print(webex_meet)
-                payload = "{\n\"toPersonEmail\": \"abhr@cisco.com\",\n\"markdown\": \"[Learn more](https://adaptivecards.io) about Adaptive Cards.\",\n\"attachments\": [\n{\n\"contentType\": \"application/vnd.microsoft.card.adaptive\",\n\"content\": {\n\"type\": \"AdaptiveCard\",\n\"version\": \"1.0\",\n\"body\": [\n{\n\"type\": \"TextBlock\",\n\"text\": \"An appoinment is booked with you for patient Mr. David for "+str(slot)+". Based on Machine Learning symptom analysis it seems that the patient is suffering from "+str(disease)+" with the accuracy of "+str(score)+". Thank you.\"\n}\n],\n\"actions\": [\n{\n\"type\": \"Action.OpenUrl\",\n\"title\": \"Webex Meeting Link\",\n\"url\":\""+str(webex_meet)+"\"\n}\n]\n}\n}\n]\n}"
+                payload = "{\n\"toPersonEmail\": \"abhr@cisco.com\",\n\"markdown\": \"[Learn more](https://adaptivecards.io) about Adaptive Cards.\",\n\"attachments\": [\n{\n\"contentType\": \"application/vnd.microsoft.card.adaptive\",\n\"content\": {\n\"type\": \"AdaptiveCard\",\n\"version\": \"1.0\",\n\"body\": [\n{\n\"type\": \"TextBlock\",\n\"text\": \"An appoinment is booked with you for patient "+patient_name+" for "+str(slot)+". Based on Machine Learning symptom analysis it seems that the patient is suffering from "+str(disease)+" with the accuracy of "+str(score)+". Thank you.\"\n}\n],\n\"actions\": [\n{\n\"type\": \"Action.OpenUrl\",\n\"title\": \"Webex Meeting Link\",\n\"url\":\""+str(webex_meet)+"\"\n}\n]\n}\n}\n]\n}"
                 notify_docs(payload)
             elif any(re.search(word,in_message) for word in ['call a doctor', 'connect me to the doctor', 'talk to a doctor', 'connect me to a doctor', 'speak to a doctor']):
                 msg = virtual_doc()
@@ -346,7 +346,7 @@ def teams_webhook():
                 print("Disease = "+disease)
                 print("Score = " + str(score))
                 if disease in ml.critical_disease:
-                    payload = "{\n\"toPersonEmail\": \"abhr@cisco.com\",\n\"markdown\": \"[Learn more](https://adaptivecards.io) about Adaptive Cards.\",\n\"attachments\": [\n{\n\"contentType\": \"application/vnd.microsoft.card.adaptive\",\n\"content\": {\n\"type\": \"AdaptiveCard\",\n\"version\": \"1.0\",\n\"body\": [\n{\n\"type\": \"TextBlock\",\n\"text\": \"Patient David is waiting in your Webex Teams room, kindly connect. Based on Machine Learning symptom analysis it seems that the patient is suffering from "+str(disease)+" with the accuracy of "+str(score)+". Thank you.\"\n}\n],\n\"actions\": [\n{\n\"type\": \"Action.OpenUrl\",\n\"title\": \"Connect\",\n\"url\":\"http://0.0.0.0:8080/test\"\n}\n]\n}\n}\n]\n}"
+                    payload = "{\n\"toPersonEmail\": \"abhr@cisco.com\",\n\"markdown\": \"[Learn more](https://adaptivecards.io) about Adaptive Cards.\",\n\"attachments\": [\n{\n\"contentType\": \"application/vnd.microsoft.card.adaptive\",\n\"content\": {\n\"type\": \"AdaptiveCard\",\n\"version\": \"1.0\",\n\"body\": [\n{\n\"type\": \"TextBlock\",\n\"text\": \"Patient "+patient_name+" is waiting in your Webex Teams room, kindly connect. Based on Machine Learning symptom analysis it seems that the patient is suffering from "+str(disease)+" with the accuracy of "+str(score)+". Thank you.\"\n}\n],\n\"actions\": [\n{\n\"type\": \"Action.OpenUrl\",\n\"title\": \"Connect\",\n\"url\":\"http://0.0.0.0:8080/test\"\n}\n]\n}\n}\n]\n}"
                     notify_docs(payload)
                     connect_doc(roomId)
                     msg = "<b>Dr Abhi</b> available now...<br/><a href=\""+bot_url+"/test\" target=\"_blank\">Click here to talk to your doctor over video</a>"
