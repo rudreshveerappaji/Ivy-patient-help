@@ -99,7 +99,7 @@ git clone https://wwwin-github.cisco.com/rudreshveerappaji/Ivy-patient-help.git
 ```
 
 
-2. Configure a .env file in the code directory under config folder with all the necessary environment variables (replace the your values)
+2. Configure a .env file in the code directory under config folder with all the necessary environment variables (replace with your values)
 ```
 BOT_EMAIL = 'Bot Email'
 BOT_TOKEN = 'Bot Token'
@@ -131,17 +131,18 @@ pip install -r req.txt
 
 6. Run the bot.py on a publicly acessible URL using ngrok(used in this project)
 ```
-Ngrok Docs - https://ngrok.com/docs
-Start ngrok tunnel - run on a terminal -> ./ngrok http 8080
-FLASK_APP = bot.py
-flask run
+Ngrok Docs - 
+  https://ngrok.com/docs
+Start ngrok tunnel - (run on a terminal)
+  ./ngrok http 8080
+Run the bot -
+  python bot.py
 ```
 
 
 7. Run main.py to serve the main page using flask
 ```
-FLASK_APP = main.py
-flask run
+python = main.py
 ```
 
 ## Conclusion
@@ -153,12 +154,13 @@ Here are the top benefits of using this solution:
   2. Improved patience and nurse/doctor experience even while being remote : Any device, any where, any time
   3. Faster response times for both prelimary diagnosis and subsequent diagnosis.
   4. Option Video integrations like with DX for better video experience.
-  5. Digital prescription using whiteboard or other such tools integration
+  5. QR code based Digital prescription using whiteboard or other such tools integration and secure exchange between doctor, patient and pharmacy
   6. Sensors like Apple Watch, etc that measure medical vitals like pulse rate, respiration rate, heart rate, BP, temperature etc can be remotely measured integrated to the solution.
   7. AI/ML integration to enhance prelimary diagnosis, on top of the platform that this solution provides.
   8. Replicable solution model which can be adapted to any other industry for similar benefits
-  9. Symptom Analysis and basic diagnosis using AI/ML
 
+Future enhancements would include:
+  1. 
 
 ## Authors
 
