@@ -142,7 +142,7 @@ def greetings():
     Welcome message
     :return: message
     '''
-    return "Hi there, welcome to MediLabs!! My name is %s. please share your name, email address, location and patient ID.<br/>" % bot_app_name
+    return "Hi there, welcome to MediPlus!! My name is %s. please share your name, email address, location and patient ID.<br/>" % bot_app_name
 
 
 
@@ -346,7 +346,7 @@ def teams_webhook():
                 print("Disease = "+disease)
                 print("Score = " + str(score))
                 if disease in ml.critical_disease:
-                    payload = "{\n\"toPersonEmail\": \"abhr@cisco.com\",\n\"markdown\": \"[Learn more](https://adaptivecards.io) about Adaptive Cards.\",\n\"attachments\": [\n{\n\"contentType\": \"application/vnd.microsoft.card.adaptive\",\n\"content\": {\n\"type\": \"AdaptiveCard\",\n\"version\": \"1.0\",\n\"body\": [\n{\n\"type\": \"TextBlock\",\n\"text\": \"Patient "+patient_name+" is waiting in your Webex Teams room, kindly connect. Based on Machine Learning symptom analysis it seems that the patient is suffering from "+str(disease)+" with the accuracy of "+str(score)+". Thank you.\"\n}\n],\n\"actions\": [\n{\n\"type\": \"Action.OpenUrl\",\n\"title\": \"Connect\",\n\"url\":\"http://0.0.0.0:8080/test\"\n}\n]\n}\n}\n]\n}"
+                    payload = "{\n\"toPersonEmail\": \"abhr@cisco.com\",\n\"markdown\": \"[Learn more](https://adaptivecards.io) about Adaptive Cards.\",\n\"attachments\": [\n{\n\"contentType\": \"application/vnd.microsoft.card.adaptive\",\n\"content\": {\n\"type\": \"AdaptiveCard\",\n\"version\": \"1.0\",\n\"body\": [\n{\n\"type\": \"TextBlock\",\n\"text\": \"Patient "+patient_name+" is waiting in your Webex Teams room, kindly connect. Based on Machine Learning symptom analysis it seems that the patient is suffering from "+str(disease)+" with the accuracy of "+str(score)+". Thank you.\"\n}\n],\n\"actions\": [\n{\n\"type\": \"Action.OpenUrl\",\n\"title\": \"Connect\",\n\"url\":\"http://0.0.0.0:8080/connect\"\n}\n]\n}\n}\n]\n}"
                     notify_docs(payload)
                     connect_doc(roomId)
                     msg = "<b>Dr Abhi</b> available now...<br/><a href=\""+bot_url+"/test\" target=\"_blank\">Click here to talk to your doctor over video</a>"
@@ -369,13 +369,12 @@ def teams_webhook():
         return message
 
 
-@app.route('/test')
+@app.route('/connect')
 def addoc():
     '''
     Function for video call
     :return:
     '''
-    print("adhoc")
     f = open("guestToken.txt", "r")
     guest_token = f.read() #Fetch guest token
     print("bot guest - " +guest_token)
