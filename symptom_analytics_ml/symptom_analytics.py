@@ -106,8 +106,6 @@ def NaiveBayes(symtopmsList):
             break
 
     if (h=='yes'):
-        print(accuracy_score(y_test, y_pred))
-        print(disease[a])
         return disease[a], accuracy_score(y_test, y_pred)
     else:
         return "Not Found"
