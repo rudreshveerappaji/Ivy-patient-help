@@ -47,7 +47,7 @@ def generate_guest_token():
     random_user = randrange(10000, 20000, 2)
     payload = {
         "sub": str(random_user), #Guest User
-        "name": "Patient David",
+        "name": "Patient",
         "iss": os.getenv('GUEST_ISSUER_ID'), #Guest Issuer APP ID
         "exp": "1627776000"  #08/01/2021 @ 12:00am (UTC)  #Expiry date of Guest Token in UNIX timestamp
     }
