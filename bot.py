@@ -142,7 +142,7 @@ def greetings():
     Welcome message
     :return: message
     '''
-    return "Hi there, welcome to MediLabs!! My name is %s. please share your name, email address, location and patient ID.<br/>" % bot_app_name
+    return "Hi there, welcome to MediPlus!! My name is %s. please share your name, email address, location and patient ID.<br/>" % bot_app_name
 
 
 
