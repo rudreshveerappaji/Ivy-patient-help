@@ -50,7 +50,7 @@ disease=['Fungal infection','Allergy','GERD','Chronic cholestasis','Drug Reactio
 'Arthritis','(vertigo) Paroymsal  Positional Vertigo','Acne','Urinary tract infection','Psoriasis',
 'Impetigo']
 
-critical_disease = ['Covid19', 'Common Cold', 'Typhoid', 'hepatitis A',
+critical_disease = ['Gastroenteritis','Covid19', 'Common Cold', 'Typhoid', 'hepatitis A',
 'Hepatitis B','Hepatitis C','Hepatitis D','Hepatitis E', 'Tuberculosis', 'Varicoseveins','Hypothyroidism','Hyperthyroidism','Hypoglycemia','Osteoarthristis']
 
 l2=[]
