@@ -317,7 +317,7 @@ def teams_webhook():
                 msg = "Welcome "+patient_name+" !! Thanks for sharing your details, here are the list of things that I can help you with. Start by asking any of the following:<br>" \
                       "- Book a virtual appointment.<br>" \
                       "- Here are my symptoms: {Your list of symptoms}.- <a href=\"https://github.com/rudreshveerappaji/Ivy-patient-help/blob/master/symptoms_list.txt\">Reference symptoms list.</a><br>" \
-                      "- Connect to a doctor.<br>"
+                      "- Connect me to a doctor.<br>"
             elif any(word in in_message for word in ['appointment','book a time', 'book an appointment']):
                 msg = "Sure!! Please select your desired slot from below available options to meet Doctor/Nurses\n\n " \
                       "<br><h4>Option 1: 02/Aug/2020 1pm</h4>\n\n" \
