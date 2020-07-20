@@ -352,7 +352,7 @@ def teams_webhook():
                     payload = "{\n\"toPersonEmail\": \"abhr@cisco.com\",\n\"markdown\": \"[Learn more](https://adaptivecards.io) about Adaptive Cards.\",\n\"attachments\": [\n{\n\"contentType\": \"application/vnd.microsoft.card.adaptive\",\n\"content\": {\n\"type\": \"AdaptiveCard\",\n\"version\": \"1.0\",\n\"body\": [\n{\n\"type\": \"TextBlock\",\n\"text\": \"Patient "+patient_name+" is waiting in your Webex Teams room, kindly connect.Based on Machine Learning symptom analysis it seems that the patient is suffering from ## "+str(disease)+" ## with the accuracy of ## "+str(score)+" ##. Thank you.\"\n}\n],\n\"actions\": [\n{\n\"type\": \"Action.OpenUrl\",\n\"title\": \"Connect\",\n\"url\":\"http://http://localhost:8080/connect:8080/connect\"\n}\n]\n}\n}\n]\n}"
                     notify_docs(payload)
                     connect_doc(roomId)
-                    msg = "<b>Dr Abhi</b> available now...<br/><a href=\""+bot_url+"/test\" target=\"_blank\">Click here to talk to your doctor over video</a>"
+                    msg = "<b>Dr Abhi</b> available now...<br/><a href=\""+bot_url+"/connect\" target=\"_blank\">Click here to talk to your doctor over video</a>"
                 else:
                     msg = "Based on your symptoms, I can schedule an appointment with a nurse/doctor at the earliest slot available.<br/>Would you want me to book an appointment?"
             elif in_message.startswith("repeat after me"):
