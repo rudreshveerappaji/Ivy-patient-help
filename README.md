@@ -77,7 +77,7 @@ If the illness is critical based on the prelimnary analysis of the symptoms, bot
 The following demo illustrates the above described two major workflows of a patient leveraging our solution, including patient database tracking, symptom analysis using Naive Bayes ML model, intelligent assigning of docotors/nurses, Digital prescription, secure vitals & test report exchange between patient & nurse/doctor only - of these through native modules or leveraging APIs where required to illustrate the integration of webex teams and the power of the platform to provide such a ecosystem. In the demo we are illustrating the solution using a ficticious hospital called "Medi-Plus+".
 
 
-[![Watch the video](documents/youtube-image-2.jpg)](https://www.youtube.com/watch?v=dKM5fvn25jM&feature=youtu.be)
+[![Watch the video](documents/youtube-image-2.png)](https://www.youtube.com/watch?v=dKM5fvn25jM&feature=youtu.be)
 
 
 ## Prerequisites
