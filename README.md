@@ -172,6 +172,14 @@ Future enhancements would include:
 * Abhijith Ramesh Chandra (abhr@cisco.com)
 * Harpreet Bhatia (harbhati@cisco.com)
 
+## License
+Provided under Cisco Sample Code License, for details see [LICENSE](https://github.com/CiscoSE/erx_project/blob/master/LICENSE)
+
+## Code of Conduct
+Our code of conduct is available [here](https://github.com/rudreshveerappaji/Ivy-patient-help/blob/master/CODE_OF_CONDUCT.md)
+
+## Contributing
+See our contributing guidelines [here](https://github.com/rudreshveerappaji/Ivy-patient-help/blob/master/CONTRIBUTING.md)
 
 ## DISCLAIMER:
 Please note: This script is meant for demo purposes only. All tools/ scripts in this repo are released for use "AS IS" without any warranties of any kind, including, but not limited to their installation, use, or performance. Any use of these scripts and tools is at your own risk. There is no guarantee that they have been through thorough testing in a comparable environment and we are not responsible for any damage or data loss incurred with their use. You are responsible for reviewing and testing any scripts you run thoroughly before use in any non-testing environment.
