@@ -80,6 +80,12 @@ The following demo illustrates the above described two major workflows of a pati
 [![Watch the video](documents/youtube-image-2.png)](https://www.youtube.com/watch?v=dKM5fvn25jM&feature=youtu.be)
 
 
+The illustrations in the video are for our Ivy solution directly integrated with a fictitious hostpital's webpage for a real world scenario with full integration. You can also try this out the solution from your own webex teams app, by searching for "Ivy - Patient Help" and start with saying "Hi" and let Ivy take you through the solution workflow.
+
+<p align="center">
+  <img src="documents/Ivy-webex-app.png">
+</p>
+
 ## Prerequisites
 * Python 3.x
 * Text editor
